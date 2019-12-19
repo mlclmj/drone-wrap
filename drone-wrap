@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+if [[ "$1" = "." && -z ${DRONE_SERVER+x}]] ; then
+  repo=$(git remote -v 2>/dev/null | sed 's/^.*git@github.com:\(.*\) (.*)/\1/' | tail -n 1)
+  open "${DRONE_SERVER}/${repo}"
+else
+  drone $@
+fi
